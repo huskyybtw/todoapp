@@ -19,7 +19,7 @@ public class Main extends Application {
     public static void setup(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("LogInScene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-        stage.setTitle("Hello!");
+        stage.setTitle("TODO APP SUPER MEGA");
         stage.setScene(scene);
     }
 
