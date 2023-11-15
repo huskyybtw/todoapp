@@ -37,17 +37,18 @@ public class MongoDB {
         Document search = new Document(key,value);
         Document found = COLLECTION.find(search).first();
 
-        if (found!=null){
-            for (Map.Entry<String, Object> entry : found.entrySet()) {
-                System.out.println(entry.getKey() + ": " + entry.getValue());
-                return true;
-            }
+        if (found != null) {
+            // Access document data
+            System.out.println("Document found:");
+
+            System.out.println(found.get("name"));
+
+            return true;
         }
         else {
             System.out.println("empty");
             return false;
         }
-        return false;
     }
 }
 
