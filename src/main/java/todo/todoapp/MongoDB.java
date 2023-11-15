@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.ConnectionString;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ CLASS FOR CONNECTION WITH DATABASE
 
 public class MongoDB {
     // CONNECTION SETUP
-    private static final String URI = "mongodb+srv://admin:admin@cluster0.iou5rdl.mongodb.net/?retryWrites=true&w=majority";
+    private static final ConnectionString URI = new ConnectionString("mongodb+srv://admin:<admin>@cluster0.iou5rdl.mongodb.net/");
     private static final MongoClient MONGOCLIENT = MongoClients.create(URI);
     private static final MongoDatabase DATABASE = MONGOCLIENT.getDatabase("test");
     private static final MongoCollection<Document> COLLECTION = DATABASE.getCollection("Collection");
