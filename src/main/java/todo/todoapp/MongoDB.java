@@ -17,7 +17,7 @@ CLASS FOR CONNECTION WITH DATABASE
 
 public class MongoDB {
     // CONNECTION SETUP
-    private static final ConnectionString URI = new ConnectionString("mongodb+srv://admin:<admin>@cluster0.iou5rdl.mongodb.net/");
+    private static final ConnectionString URI = new ConnectionString("mongodb+srv://admin:admin@cluster0.iou5rdl.mongodb.net/");
     private static final MongoClient MONGOCLIENT = MongoClients.create(URI);
     private static final MongoDatabase DATABASE = MONGOCLIENT.getDatabase("test");
     private static final MongoCollection<Document> COLLECTION = DATABASE.getCollection("Collection");
