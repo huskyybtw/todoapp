@@ -40,7 +40,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="name_TextField1" layoutY="305.0" prefHeight="40.0" prefWidth="600.0" />
+            <TextField fx:id="surname_TextField" layoutY="305.0" prefHeight="40.0" prefWidth="600.0" />
             <Label layoutX="601.0" layoutY="31.0" prefHeight="40.0" prefWidth="300.0" text="Label" />
             <Label layoutX="601.0" layoutY="91.0" prefHeight="40.0" prefWidth="300.0" text="Label" />
             <Label layoutX="601.0" layoutY="151.0" prefHeight="40.0" prefWidth="300.0" text="Label" />
@@ -54,6 +54,6 @@
             <Font size="60.0" />
          </font>
       </Label>
-    <Button fx:id="sigin_Button" layoutX="241.0" layoutY="536.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="218.0" text="Button" />
+    <Button fx:id="sigin_Button" layoutX="241.0" layoutY="536.0" mnemonicParsing="false" onAction="#SignIn" prefHeight="164.0" prefWidth="218.0" text="Button" />
    </children>
 </AnchorPane>

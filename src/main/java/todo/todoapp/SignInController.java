@@ -53,7 +53,7 @@ public class SignInController {
             info_surname_Label.setText("Wpisz nazwisko");
         }
         else{
-            surname = username_TextField.getText();
+            surname = surname_TextField.getText();
         }
 
         if(password_TextField.getText().isEmpty()){
@@ -71,7 +71,7 @@ public class SignInController {
         }
 
         HashMap<String, String> map = new HashMap<>();
-        if(password == c_password) {
+        if(password.equals(c_password)) {
             map.put("username", username);
             map.put("name", name);
             map.put("surname", surname);
