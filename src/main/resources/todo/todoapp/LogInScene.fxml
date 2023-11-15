@@ -25,7 +25,7 @@
             </FlowPane>
             <FlowPane prefHeight="40.0" prefWidth="280.0">
                <children>
-                  <Button fx:id="logInButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" text="Log in" />
+                  <Button fx:id="logInButton" mnemonicParsing="false" onAction="#switchToDashboard" prefHeight="40.0" prefWidth="140.0" text="Log in" />
                   <Button fx:id="signInButton" mnemonicParsing="false" onAction="#switchToSignIn" prefHeight="40.0" prefWidth="140.0" text="Sign in" />
                </children>
             </FlowPane>
