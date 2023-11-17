@@ -8,6 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.ConnectionString;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 /*
 CLASS FOR CONNECTION WITH DATABASE
@@ -25,14 +26,12 @@ public class MongoDB {
     // INSTERTS DOCUMENT INTO COLLECTION
     // ACCEPTS HASHMAP OF DOCUMENT INFO
     // RETURNS TRUE IF ALL GOOD
-    public static boolean insert_one(HashMap<String,String> map){
+    public static boolean insert_one(HashMap<String, String> map) {
 
-        if (check_single("username",map.get("username"))){
+        if (check_single("username", map.get("username"))) {
             System.out.println("username alredy exists ERROR");
             return false; // THAT USERNAME ALREDY EXISTS
-        }
-
-        else {
+        } else {
             Document document = new Document();
             for (String i : map.keySet()) {
                 document.append(i, map.get(i));
@@ -43,8 +42,8 @@ public class MongoDB {
     }
 
     // GETS DOCUMENT INFO
-    public static boolean check_single(String key,String value){
-        Document search = new Document(key,value);
+    public static boolean check_single(String key, String value) {
+        Document search = new Document(key, value);
         Document found = COLLECTION.find(search).first();
 
         if (found != null) {
@@ -55,8 +54,7 @@ public class MongoDB {
             System.out.println(found.get("name"));
             System.out.println(found.get("password"));
             return true;
-        }
-        else {
+        } else {
             System.out.println("empty");
             return false;
         }
@@ -64,7 +62,7 @@ public class MongoDB {
 
 
     // RETURNS USERNAME THAT FITS A PASSWORD
-    public static String check_user_password (String user_value,String password_value) {
+    public static String check_user_password(String user_value, String password_value) {
         // CHECKS IF USER WITH THIS PASSWORD EXIST
         Document search = new Document("password", password_value);
         Document found = COLLECTION.find(search).first();
@@ -75,13 +73,34 @@ public class MongoDB {
             } else {
                 return ""; //RETURNS EMPTY STRING IF USER AND PASSWORD DOSENT MATH
             }
-        }
-
-        else { // USER NOT FOUND
+        } else { // USER NOT FOUND
             return ""; // RETURNS EMPTY STRING IF USER WITH THIS PASSWORD IS NOT IN DATABASE
         }
     }
 
+    //GETS SINGLE DOCUMENT
+    //PUTS IT INTO HASHMAP
+    //RETURNS HASHMAP WITH FOUND DATA
+    //IF ERROR RETURNS OPTIONAL
+    public static Optional<HashMap<String, Object>> get_single(String username_value) {
+        try {
+            Document search = new Document("username", username_value);
+            Document found = COLLECTION.find(search).first();
+
+            if (found != null) {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("username", found.get("username"));
+                map.put("name", found.get("name"));
+                map.put("surname", found.get("surname"));
+                return Optional.of(map);
+            } else {
+                System.out.println("empty");
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
 }
 
 
