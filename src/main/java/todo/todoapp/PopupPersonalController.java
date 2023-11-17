@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 public class PopupPersonalController {
     @FXML
@@ -12,13 +11,16 @@ public class PopupPersonalController {
 
     private String username, name, surname;
 
-    @FXML
-    private void initialize(){
+    public void user_info(HashMap<String, Object> data){
 
-    }
-
-    public void user_info(Optional<HashMap<String, Object>> data){
-        data.get();
+        // CASTS FOUND DATA INTO STRING FROM HASHMAP
+        username = (String) data.get("username");
+        name = (String) data.get("name");
+        surname = (String) data.get("surname");
+        // LABEL SETUP
+        username_Label.setText(username);
+        username_Label.setText(name);
+        username_Label.setText(surname);
 
     }
 }

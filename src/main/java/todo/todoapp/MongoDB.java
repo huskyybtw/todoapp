@@ -8,7 +8,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.ConnectionString;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 /*
 CLASS FOR CONNECTION WITH DATABASE
@@ -49,13 +48,12 @@ public class MongoDB {
         if (found != null) {
             // Access document data
             System.out.println("Document found:");
-
             // Test czy znajduje poprawna
             System.out.println(found.get("name"));
             System.out.println(found.get("password"));
             return true;
         } else {
-            System.out.println("empty");
+            System.out.println("No Document was found");
             return false;
         }
     }
@@ -71,7 +69,7 @@ public class MongoDB {
             if (found.get("username").equals(user_value)) {
                 return user_value; // RETURNS BACK USERNAME IF PASSWORD WAS CORRECT
             } else {
-                return ""; //RETURNS EMPTY STRING IF USER AND PASSWORD DOSENT MATH
+                return ""; //RETURNS EMPTY STRING IF USER AND PASSWORD DOESNT MATH
             }
         } else { // USER NOT FOUND
             return ""; // RETURNS EMPTY STRING IF USER WITH THIS PASSWORD IS NOT IN DATABASE
@@ -81,8 +79,8 @@ public class MongoDB {
     //GETS SINGLE DOCUMENT
     //PUTS IT INTO HASHMAP
     //RETURNS HASHMAP WITH FOUND DATA
-    //IF ERROR RETURNS OPTIONAL
-    public static Optional<HashMap<String, Object>> get_single(String username_value) {
+    //IF ERROR RETURNS EMPTY MAP
+    public static HashMap<String, Object> get_single(String username_value) {
         try {
             Document search = new Document("username", username_value);
             Document found = COLLECTION.find(search).first();
@@ -92,13 +90,13 @@ public class MongoDB {
                 map.put("username", found.get("username"));
                 map.put("name", found.get("name"));
                 map.put("surname", found.get("surname"));
-                return Optional.of(map);
+                return map;
             } else {
                 System.out.println("empty");
-                return Optional.empty();
+                return new HashMap<>();
             }
         } catch (Exception e) {
-            return Optional.empty();
+            return new HashMap<>();
         }
     }
 }

@@ -22,12 +22,11 @@ public class LogInController {
     private DashboardController dashboardController;
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
 
     @FXML
     public void switchToSignIn(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SignInScene.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SignUpScene.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
