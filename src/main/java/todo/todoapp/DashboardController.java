@@ -21,6 +21,7 @@ public class DashboardController {
     private Button r_login;
     @FXML
     private TextField name_TextField, surname_TextField, username_TextField;
+    private static String username;
     @FXML
     public void switchToLogIn1(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LogInScene.fxml")));
@@ -33,9 +34,14 @@ public class DashboardController {
     @FXML
     public void readText(ActionEvent event){
         MongoDB.get_one("username", username_TextField.getText());
-
-
-
-
     }
+
+    @FXML
+    public static void print_username(String send_username){
+        username = send_username;
+    }
+
+
+
+
 }
