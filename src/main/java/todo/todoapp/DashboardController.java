@@ -62,6 +62,9 @@ public class DashboardController {
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
             popupStage.setScene(new Scene(root));
+
+            //STAGE SETUP LESS UGLY
+            popupStage.setTitle(username + " personal info");
             popupStage.showAndWait();
         }
     }

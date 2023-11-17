@@ -46,11 +46,10 @@ public class LogInController {
         String found_username = MongoDB.check_user_password(username,password);
 
         if(found_username.isEmpty()){
-            System.out.println("Error pusty string");
+            System.out.println("ERROR PUSTY STRING");
         }
 
         else {
-            System.out.println("wypisane" + found_username);
 
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("DashboardScene.fxml")));
             Parent root = loader.load();

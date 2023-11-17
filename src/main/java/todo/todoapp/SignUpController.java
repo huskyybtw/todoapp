@@ -63,8 +63,11 @@ public class SignUpController {
             password = password_TextField.getText();
         }
 
-        if(password_TextField.getText().isEmpty()){
+        if(c_password_TextField.getText().isEmpty()){
             info_c_password_Label.setText("Powtorz haslo");
+        }
+        else if(!c_password_TextField.getText().equals(password)){
+            info_c_password_Label.setText("Hasla do siebie nie pasuja");
         }
         else{
             c_password = c_password_TextField.getText();

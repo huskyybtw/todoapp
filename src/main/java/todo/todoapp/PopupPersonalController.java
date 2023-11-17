@@ -18,9 +18,9 @@ public class PopupPersonalController {
         name = (String) data.get("name");
         surname = (String) data.get("surname");
         // LABEL SETUP
-        username_Label.setText(username);
-        username_Label.setText(name);
-        username_Label.setText(surname);
+        username_Label.setText("username: " + username);
+        name_Label.setText("name: " + name);
+        surname_Label.setText("surname: " + surname);
 
     }
 }
