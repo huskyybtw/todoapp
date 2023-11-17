@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,12 +19,14 @@ public class DashboardController {
     private Scene scene;
     private Parent root;
     @FXML
-    private Button r_login;
+    private Button logout_Button;
     @FXML
-    private TextField name_TextField, surname_TextField, username_TextField;
+    private  Label display_username_Label;
     private static String username;
     @FXML
     public void switchToLogIn1(ActionEvent event) throws IOException {
+        username = "";
+
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LogInScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -32,16 +35,9 @@ public class DashboardController {
     }
 
     @FXML
-    public void readText(ActionEvent event){
-        MongoDB.get_one("username", username_TextField.getText());
-    }
-
-    @FXML
-    public static void print_username(String send_username){
+    public  void user_dashboard(String send_username){
+        System.out.println("wypisane" + send_username);
         username = send_username;
+        display_username_Label.setText(username);
     }
-
-
-
-
 }
