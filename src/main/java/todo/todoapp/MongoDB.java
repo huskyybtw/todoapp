@@ -8,7 +8,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.ConnectionString;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /*
 CLASS FOR CONNECTION WITH DATABASE
@@ -22,18 +21,29 @@ public class MongoDB {
     private static final MongoDatabase DATABASE = MONGOCLIENT.getDatabase("test");
     private static final MongoCollection<Document> COLLECTION = DATABASE.getCollection("Collection");
 
+    // IF NO USER WITH THIS NAME IS IN THE DATABSE
     // INSTERTS DOCUMENT INTO COLLECTION
     // ACCEPTS HASHMAP OF DOCUMENT INFO
+    // RETURNS TRUE IF ALL GOOD
     public static boolean insert_one(HashMap<String,String> map){
-        Document document = new Document();
-        for (String i : map.keySet()){
-            document.append(i,map.get(i));
+
+        if (check_single("username",map.get("username"))){
+            System.out.println("username alredy exists ERROR");
+            return false; // THAT USERNAME ALREDY EXISTS
         }
-        COLLECTION.insertOne(document);
-        return true;
+
+        else {
+            Document document = new Document();
+            for (String i : map.keySet()) {
+                document.append(i, map.get(i));
+            }
+            COLLECTION.insertOne(document);
+            return true;
+        }
     }
+
     // GETS DOCUMENT INFO
-    public static boolean get_one(String key,String value){
+    public static boolean check_single(String key,String value){
         Document search = new Document(key,value);
         Document found = COLLECTION.find(search).first();
 
@@ -41,8 +51,9 @@ public class MongoDB {
             // Access document data
             System.out.println("Document found:");
 
+            // Test czy znajduje poprawna
             System.out.println(found.get("name"));
-
+            System.out.println(found.get("password"));
             return true;
         }
         else {
@@ -50,6 +61,27 @@ public class MongoDB {
             return false;
         }
     }
+
+
+    // RETURNS USERNAME THAT FITS A PASSWORD
+    public static String check_user_password (String user_value,String password_value) {
+        // CHECKS IF USER WITH THIS PASSWORD EXIST
+        Document search = new Document("password", password_value);
+        Document found = COLLECTION.find(search).first();
+
+        if (found != null) { // USER FOUND IN DATABASE
+            if (found.get("username").equals(user_value)) {
+                return user_value; // RETURNS BACK USERNAME IF PASSWORD WAS CORRECT
+            } else {
+                return ""; //RETURNS EMPTY STRING IF USER AND PASSWORD DOSENT MATH
+            }
+        }
+
+        else { // USER NOT FOUND
+            return ""; // RETURNS EMPTY STRING IF USER WITH THIS PASSWORD IS NOT IN DATABASE
+        }
+    }
+
 }
 
 
