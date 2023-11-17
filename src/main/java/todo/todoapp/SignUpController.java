@@ -25,11 +25,8 @@ public class SignUpController {
     private Label info_Label, info_username_Label, info_name_Label, info_surname_Label, info_password_Label, info_c_password_Label;
     @FXML
     public void switchToLogIn(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LogInScene.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        SceneManager.SwitchScene(currentStage, "LogInScene.fxml");
     }
 
     public void SignUP(ActionEvent event){

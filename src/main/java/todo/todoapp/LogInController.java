@@ -26,11 +26,8 @@ public class LogInController {
 
     @FXML
     public void switchToSignIn(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SignUpScene.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            SceneManager.SwitchScene(currentStage, "SignUpScene.fxml");
     }
 
     public void switchToDashboard(ActionEvent event) throws IOException {
@@ -43,24 +40,17 @@ public class LogInController {
             password = passwordField.getText();
         }
 
-        String found_username = MongoDB.check_user_password(username,password);
+        String found_username = MongoDB.check_user_password(username, password);
 
-        if(found_username.isEmpty()){
+        if (found_username.isEmpty()) {
             System.out.println("ERROR PUSTY STRING");
+        } else {
+
+                SceneManager.SwitchToScene((Stage) ((Node) event.getSource()).getScene().getWindow(), "DashboardScene.fxml", controller -> {
+                DashboardController dashboardController = (DashboardController) controller;
+                dashboardController.user_dashboard(found_username);
+            });
+
         }
-
-        else {
-
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("DashboardScene.fxml")));
-            Parent root = loader.load();
-            dashboardController = loader.getController();
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-            dashboardController.user_dashboard(found_username);
-        }
-
     }
 }
