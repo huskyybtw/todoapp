@@ -82,6 +82,28 @@ public class MongoDB {
         }
     }
 
+    public static void assign_task (String user_value,Assignment task){
+        boolean found = false;
+        found = check_single("username",user_value);
+
+        if (!found) {
+                Document filter = new Document("username", user_value);
+                Document updateOperation= new Document("$set", new Document("Assignments", task.toDocument()));
+
+                COLLECTION.updateOne(filter, updateOperation);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
 }
 
 
