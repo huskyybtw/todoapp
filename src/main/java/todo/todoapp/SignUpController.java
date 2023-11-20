@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class SignInController {
+public class SignUpController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -32,7 +32,7 @@ public class SignInController {
         stage.show();
     }
 
-    public void SignIn(ActionEvent event){
+    public void SignUP(ActionEvent event){
         String username = "", name = "", surname = "", password = "", c_password = "";
 
         if(username_TextField.getText().isEmpty()){
@@ -63,23 +63,32 @@ public class SignInController {
             password = password_TextField.getText();
         }
 
-        if(password_TextField.getText().isEmpty()){
+        if(c_password_TextField.getText().isEmpty()){
             info_c_password_Label.setText("Powtorz haslo");
+        }
+        else if(!c_password_TextField.getText().equals(password)){
+            info_c_password_Label.setText("Hasla do siebie nie pasuja");
         }
         else{
             c_password = c_password_TextField.getText();
         }
-
-        HashMap<String, String> map = new HashMap<>();
-        if(password.equals(c_password)) {
+        // UGLY WAY OF CHECKING IF EVERYTHING WAS FILLED IN
+        if(password.equals(c_password)
+                && !username.isEmpty()
+                && !name.isEmpty()
+                && !surname.isEmpty()
+                && !password.isEmpty()) {
+            HashMap<String, String> map = new HashMap<>();
             map.put("username", username);
             map.put("name", name);
             map.put("surname", surname);
             map.put("password", password);
+
             MongoDB.insert_one(map);
+            info_Label.setText("Zarejestrowano :" + username);
         }
         else{
-            info_Label.setText("zle haslo");
+            info_Label.setText("Nie zarejestrowano prawidlowo");
         }
     }
 
