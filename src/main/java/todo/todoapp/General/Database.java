@@ -3,7 +3,7 @@ package todo.todoapp.General;
 /*
 CLASS FOR STORING INFORMATION FROM DATA BASE IN RUNTIME
 COMUNICATES WITH MONGODB
- */
+
 
 import todo.todoapp.Mongo.MongoDB;
 
@@ -19,3 +19,5 @@ public class Database {
         if (!successfull) {System.out.println("error with mongodb");}
     }
 }
+
+*/

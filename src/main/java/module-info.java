@@ -12,4 +12,6 @@ module todo.todoapp {
     opens todo.todoapp.Mongo to javafx.fxml;
     exports todo.todoapp.General;
     opens todo.todoapp.General to javafx.fxml;
+    exports todo.todoapp.Enums;
+    opens todo.todoapp.Enums to javafx.fxml;
 }

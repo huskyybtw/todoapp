@@ -6,6 +6,9 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.ConnectionString;
+import todo.todoapp.General.Assignment;
+import todo.todoapp.General.Person;
+import todo.todoapp.Enums.Role;
 
 import java.util.HashMap;
 
@@ -23,20 +26,17 @@ public class MongoDB {
 
     // IF NO USER WITH THIS NAME IS IN THE DATABSE
     // INSTERTS DOCUMENT INTO COLLECTION
-    // ACCEPTS HASHMAP OF DOCUMENT INFO
+    // ACCEPTS PERSON OBJECT OF DOCUMENT INFO
     // RETURNS TRUE IF ALL GOOD
-    public static boolean insert_one(HashMap<String,String> map){
+    public static boolean insert_one(Person person){
 
-        if (check_single("username",map.get("username"))){
+        if (check_single("username",person.getUsername())){
             System.out.println("username alredy exists ERROR");
             return false; // THAT USERNAME ALREDY EXISTS
         }
 
         else {
-            Document document = new Document();
-            for (String i : map.keySet()) {
-                document.append(i, map.get(i));
-            }
+            Document document = person.toDocument();
             COLLECTION.insertOne(document);
             return true;
         }
@@ -60,26 +60,28 @@ public class MongoDB {
         }
     }
     //GETS SINGLE DOCUMENT
-    //PUTS IT INTO HASHMAP
-    //RETURNS HASHMAP WITH FOUND DATA
-    //IF ERROR RETURNS EMPTY MAP
-    public static HashMap<String, Object> get_single(String username_value) {
+    //RETURNS PERSON WITH FOUND DATA
+    //IF ERROR RETURNS PERSON
+    public static Person get_single(String username_value) {
         try {
             Document search = new Document("username", username_value);
             Document found = COLLECTION.find(search).first();
 
             if (found != null) {
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("username", found.get("username"));
-                map.put("name", found.get("name"));
-                map.put("surname", found.get("surname"));
-                return map;
-            } else {
+                return new Person(
+                        found.getString("username"),
+                        found.getString("password"),
+                        found.getString("name"),
+                        found.getString("surname"),
+                        Role.valueOf(found.getString("role")));
+            }
+
+            else {
                 System.out.println("empty");
-                return new HashMap<>();
+                return new Person();
             }
         } catch (Exception e) {
-            return new HashMap<>();
+            return new Person();
         }
     }
 

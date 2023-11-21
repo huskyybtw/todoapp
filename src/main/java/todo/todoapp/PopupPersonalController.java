@@ -2,6 +2,7 @@ package todo.todoapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import todo.todoapp.General.Person;
 
 import java.util.HashMap;
 
@@ -11,12 +12,12 @@ public class PopupPersonalController {
 
     private String username, name, surname;
 
-    public void user_info(HashMap<String, Object> data){
+    public void user_info(Person p){
 
-        // CASTS FOUND DATA INTO STRING FROM HASHMAP
-        username = (String) data.get("username");
-        name = (String) data.get("name");
-        surname = (String) data.get("surname");
+        // DATA SETUP FROM PERSON OBJECT
+        username = p.getUsername();
+        name = p.getName();
+        surname = p.getSurname();
         // LABEL SETUP
         username_Label.setText("username: " + username);
         name_Label.setText("name: " + name);
