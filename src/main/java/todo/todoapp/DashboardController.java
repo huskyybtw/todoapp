@@ -11,11 +11,11 @@ import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import todo.todoapp.General.Assignment;
+import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoAS;
 import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class DashboardController {
@@ -52,14 +52,10 @@ public class DashboardController {
         Parent root = loader.load();
         PopupPersonalController popupController = loader.getController();
 
-        HashMap<String, Object> map = MongoDB.get_single(username); // FIND DATA IN DATABASE
-
-        if (map.isEmpty()){ // IF RETURNED MAP WAS EMPTY PROMPT AN ERROR
-            System.out.println("ERROR in DASHBOARDCONTROLER : MAP IS EMPTY");
-        }
-        else { // ELSE CONTINUE
-
-            popupController.user_info(map);
+            //GET SINGLE DATA OF PERSON LOGGED IN
+            // PASS IT INTO POPUP
+            Person person = MongoDB.get_single(username);
+            popupController.user_info(person);
 
             // SOME UGLY CODE (SHOWS POPUP WINDOW)
             Stage popupStage = new Stage();
@@ -71,7 +67,7 @@ public class DashboardController {
             popupStage.setTitle(username + " personal info");
             popupStage.showAndWait();
         }
-    }
+
 
     @FXML
     public void openPopupTask(ActionEvent event) throws IOException {
