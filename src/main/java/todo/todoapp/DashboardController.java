@@ -41,7 +41,7 @@ public class DashboardController {
     @FXML
     public void user_dashboard(String send_username){ // DISPLAY PROPER USER BASED ON LOGIN
         username = send_username; // username stores username that logged in
-        display_username_Label.setText(username);
+        display_username_Label.setText("WELCOME : " + username);
         tasklist_ListView.getItems().setAll(MongoAS.findTasks(username));
     }
 
