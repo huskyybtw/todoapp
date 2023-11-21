@@ -2,14 +2,13 @@
 package todo.todoapp.Mongo;
 
 import com.mongodb.ConnectionString;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import org.bson.Document;
 import todo.todoapp.General.Assignment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class MongoAS {
@@ -20,8 +19,8 @@ public class MongoAS {
 
     public static boolean insert_one(Assignment task){
 
-        if (check_single("Title", task.getTITLE())){
-            return false; // THAT USERNAME ALREDY EXISTS
+        if (check_single("TITLE", task.getTITLE())){
+            return false; // THAT TASK ALREDY EXISTS
         }
 
         else {
@@ -37,9 +36,7 @@ public class MongoAS {
         Document found = COLLECTION.find(search).first();
 
         if (found != null) {
-            // Access document data
             System.out.println("Document found:");
-            // Test czy znajduje poprawna
             return true;
         } else {
             System.out.println("No Document was found");
@@ -47,24 +44,57 @@ public class MongoAS {
         }
     }
 
-    public static HashMap<String, Object> get_single(Assignment task) {
+    public static Assignment get_single(String TITLE_VALUE) {
         try {
-            Document search = new Document("title", task.getTITLE());
+            Document search = new Document("TITLE", TITLE_VALUE);
             Document found = COLLECTION.find(search).first();
 
             if (found != null) {
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("TITLE", found.get("TITLE"));
-                System.out.println(found.get("TITLE"));
-                return map;
-            } else {
+                return new Assignment(
+                        found.getString("TITLE"),
+                        found.getString("CREATED_BY"),
+                        found.getList("assigned_users", String.class),
+                        found.getDate("deadline"));
+            }
+
+            else {
                 System.out.println("empty");
-                return new HashMap<>();
+                return new Assignment();
             }
         } catch (Exception e) {
-            return new HashMap<>();
+            return new Assignment();
         }
     }
+
+    public static List<Assignment> findTasks(String user) {
+        try {
+            Document search = new Document("assigned_users", user);
+            FindIterable<Document> foundDocuments = COLLECTION.find(search);
+
+            List<Assignment> taskList = new ArrayList<>();
+
+            for (Document found : foundDocuments) {
+                Assignment assignment = new Assignment(
+                        found.getString("TITLE"),
+                        found.getString("CREATED_BY"),
+                        found.getList("assigned_users", String.class),
+                        found.getDate("deadline")
+                );
+                taskList.add(assignment);
+            }
+
+            if (!taskList.isEmpty()) {
+                return taskList;
+            } else {
+                System.out.println("No tasks found for user: " + user);
+                return new ArrayList<>();
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
 }
 
 

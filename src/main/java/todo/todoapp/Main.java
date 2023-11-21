@@ -4,25 +4,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import todo.todoapp.General.Assignment;
-import todo.todoapp.Mongo.MongoAS;
-import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
-import java.util.Date;
+
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
         setup(stage);
-
-
-        Date testdate = new Date();
-        Assignment test = new Assignment("test","dwa","dwa",testdate);
-        MongoAS.insert_one(test);
-        MongoAS.get_single(test);
-
         stage.show();
     }
 

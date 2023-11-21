@@ -8,15 +8,24 @@ import java.util.List;
 
 public class Assignment {
     private final Date CREATION_DATE;
-    private Date deadline;
-
     private final String TITLE; //  UNIQE ID FOR ASSIGMENTS
     private final String CREATED_BY;
-    private List<String> assigned_users = new ArrayList<>(); // LIST OF USERS
+    private final boolean ERROR;
 
+    private List<String> assigned_users = new ArrayList<>(); // LIST OF USERS
+    private Date deadline;
     private TaskStatus status;
 
+    public Assignment(){
+        this.ERROR = true;
+        this.CREATION_DATE = null;
+        this.CREATED_BY = null;
+        this.TITLE = null;
+    }
+
+
     public Assignment(String title, String creator, String user, Date deadline){
+        this.ERROR = false;
         this.CREATION_DATE = new Date(); // TODAY'S DATE
         this.deadline = deadline;
         this.status = TaskStatus.ONGOING;
@@ -27,6 +36,7 @@ public class Assignment {
     }
 
     public Assignment(String title,String creator,List<String> users,Date deadline){
+        this.ERROR = false;
         this.CREATION_DATE = new Date(); // TODAY'S DATE
         this.deadline = deadline;
         this.status = TaskStatus.ONGOING;

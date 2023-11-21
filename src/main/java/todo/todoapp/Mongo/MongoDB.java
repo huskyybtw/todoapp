@@ -6,7 +6,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.ConnectionString;
-import todo.todoapp.General.Assignment;
 
 import java.util.HashMap;
 
@@ -98,20 +97,6 @@ public class MongoDB {
             }
         } else { // USER NOT FOUND
             return ""; // RETURNS EMPTY STRING IF USER WITH THIS PASSWORD IS NOT IN DATABASE
-        }
-    }
-
-    public static void assign_task (String user_value, Assignment task){
-        boolean found = false;
-        found = check_single("username",user_value);
-        System.out.println(found);
-        if (found) {
-                Document filter = new Document("username", user_value);
-                Document updateOperation= new Document("$set", new Document("Assignments", task.toDocument()));
-
-                System.out.println("dziala");
-                COLLECTION.updateOne(filter, updateOperation);
-                System.out.println("dziala");
         }
 
     }
