@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
@@ -60,7 +61,8 @@ public class LogInController {
             stage.setScene(scene);
             stage.show();
 
-            dashboardController.user_dashboard(found_username);
+            Person loginPerson = MongoDB.get_single(found_username);
+            dashboardController.initialize(loginPerson);
         }
 
     }

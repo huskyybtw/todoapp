@@ -52,7 +52,6 @@ public class MongoDB {
             System.out.println("Document found:");
             // Test czy znajduje poprawna
             System.out.println(found.get("name"));
-            System.out.println(found.get("password"));
             return true;
         } else {
             System.out.println("No Document was found");
@@ -75,12 +74,13 @@ public class MongoDB {
                         found.getString("surname"),
                         Role.valueOf(found.getString("role")));
             }
-
             else {
                 System.out.println("empty");
                 return new Person();
             }
+
         } catch (Exception e) {
+            System.out.println("EXCEPTION: " + e.getMessage());
             return new Person();
         }
     }

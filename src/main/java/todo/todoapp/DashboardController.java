@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import todo.todoapp.General.Assignment;
 import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoAS;
-import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -27,10 +26,10 @@ public class DashboardController {
     @FXML
     private ListView<Assignment> tasklist_ListView;
 
-    private static String username; // username stores username that logged in
+    private static Person loginPerson; // Stored person object
     @FXML
-    public void switchToLogIn1(ActionEvent event) throws IOException {
-        username = "";
+    public void switchToLogIn(ActionEvent event) throws IOException {
+        loginPerson = null;
 
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LogInScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -39,10 +38,10 @@ public class DashboardController {
         stage.show();
     }
     @FXML
-    public void user_dashboard(String send_username){ // DISPLAY PROPER USER BASED ON LOGIN
-        username = send_username; // username stores username that logged in
-        display_username_Label.setText("WELCOME : " + username);
-        tasklist_ListView.getItems().setAll(MongoAS.findTasks(username));
+    public void initialize(Person send_person){ // DISPLAY PROPER USER BASED ON LOGIN
+        loginPerson = send_person;
+        display_username_Label.setText("WELCOME : " + loginPerson.getUsername());
+        tasklist_ListView.getItems().setAll(MongoAS.findTasks(loginPerson.getUsername()));
     }
 
     // DISPLAY POPUP WINDOW WITH PERSNOAL INFO
@@ -54,8 +53,7 @@ public class DashboardController {
 
             //GET SINGLE DATA OF PERSON LOGGED IN
             // PASS IT INTO POPUP
-            Person person = MongoDB.get_single(username);
-            popupController.user_info(person);
+            popupController.initialize(loginPerson);
 
             // SOME UGLY CODE (SHOWS POPUP WINDOW)
             Stage popupStage = new Stage();
@@ -64,7 +62,7 @@ public class DashboardController {
             popupStage.setScene(new Scene(root));
 
             //STAGE SETUP LESS UGLY
-            popupStage.setTitle(username + " personal info");
+            popupStage.setTitle(loginPerson.getUsername() + " personal info");
             popupStage.showAndWait();
         }
 
@@ -75,7 +73,7 @@ public class DashboardController {
         Parent root = loader.load();
         PopupTaskController popupController = loader.getController();
 
-            popupController.set_creator(username);
+            popupController.initialize(loginPerson.getUsername());
 
             // SOME UGLY CODE (SHOWS POPUP WINDOW)
             Stage popupStage = new Stage();

@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import todo.todoapp.General.Person;
+import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
 
@@ -13,6 +15,10 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         setup(stage);
+
+        Person person= MongoDB.get_single("test");
+        MongoDB.insert_one(person);
+
         stage.show();
     }
 
