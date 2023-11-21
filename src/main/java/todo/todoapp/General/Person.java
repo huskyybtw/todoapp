@@ -12,6 +12,8 @@ public class Person {
     private String name;
     private String surname;
 
+    private int team;
+
     public Person(){}
 
     public Person(String u, String p, String name, String surname){
@@ -42,6 +44,11 @@ public class Person {
         document.append("name", this.name);
         document.append("surname", this.surname);
         document.append("role", this.role);
+
+        System.out.println("password" + this.password);
+        System.out.println("name" + this.name);
+        System.out.println("surname" + this.surname);
+        System.out.println("role" + this.role);
 
         return document;
     }

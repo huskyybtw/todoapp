@@ -3,13 +3,17 @@ package todo.todoapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import todo.todoapp.General.Assignment;
+import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoAS;
 
 import java.util.Date;
 
 public class PopupTaskController {
+    @FXML
+    private ListView<Person> users_ListView;
     @FXML
     private TextField TITLE_TextField;
     @FXML
@@ -34,7 +38,7 @@ public class PopupTaskController {
 
     }
 
-    public void set_creator(String user){
+    public void initialize(String user){
         creator = user;
     }
 }
