@@ -8,4 +8,8 @@ module todo.todoapp {
 
     opens todo.todoapp to javafx.fxml;
     exports todo.todoapp;
+    exports todo.todoapp.Mongo;
+    opens todo.todoapp.Mongo to javafx.fxml;
+    exports todo.todoapp.General;
+    opens todo.todoapp.General to javafx.fxml;
 }

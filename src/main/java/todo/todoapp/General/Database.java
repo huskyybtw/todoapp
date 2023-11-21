@@ -1,9 +1,11 @@
-package todo.todoapp;
+package todo.todoapp.General;
 
 /*
 CLASS FOR STORING INFORMATION FROM DATA BASE IN RUNTIME
 COMUNICATES WITH MONGODB
  */
+
+import todo.todoapp.Mongo.MongoDB;
 
 import java.util.HashMap;
 

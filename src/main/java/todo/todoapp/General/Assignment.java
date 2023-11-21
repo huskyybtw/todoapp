@@ -1,4 +1,4 @@
-package todo.todoapp;
+package todo.todoapp.General;
 
 import org.bson.Document;
 
@@ -10,30 +10,41 @@ public class Assignment {
     private final Date CREATION_DATE;
     private Date deadline;
 
+    private final String TITLE; //  UNIQE ID FOR ASSIGMENTS
     private final String CREATED_BY;
     private List<String> assigned_users = new ArrayList<>(); // LIST OF USERS
 
     private TaskStatus status;
 
-    Assignment(Date deadline,String creator,List<String> users){
+    public Assignment(String title, String creator, String user, Date deadline){
         this.CREATION_DATE = new Date(); // TODAY'S DATE
         this.deadline = deadline;
-
         this.status = TaskStatus.ONGOING;
+
+        this.TITLE = title;
+        this.CREATED_BY = creator;
+        this.assigned_users.add(user);
+    }
+
+    public Assignment(String title,String creator,List<String> users,Date deadline){
+        this.CREATION_DATE = new Date(); // TODAY'S DATE
+        this.deadline = deadline;
+        this.status = TaskStatus.ONGOING;
+
+        this.TITLE = title;
         this.CREATED_BY = creator;
 
-        for (int i= 0 ; i<users.size(); i++){
-            this.assigned_users.add(users.get(i));
-        }
+        this.assigned_users.addAll(users);
     }
 
     // MONGODB TO DOCUMENT CONVERSION
     public Document toDocument() {
         Document document = new Document();
 
+        document.append("TITLE",this.TITLE);
+        document.append("CREATED_BY", this.CREATED_BY);
         document.append("CREATION_DATE", this.CREATION_DATE);
         document.append("deadline", this.deadline);
-        document.append("CREATED_BY", this.CREATED_BY);
         document.append("status", this.status.name());
         document.append("assigned_users", this.assigned_users);
 
@@ -57,6 +68,7 @@ public class Assignment {
     public String getCREATED_BY(){
         return CREATED_BY;
     }
+    public String getTITLE(){return TITLE;}
     public Date getDeadline(){
         return deadline;
     }
