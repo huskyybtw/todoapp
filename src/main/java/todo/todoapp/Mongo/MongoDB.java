@@ -66,13 +66,29 @@ public class MongoDB {
             Document search = new Document("username", username_value);
             Document found = COLLECTION.find(search).first();
 
+
             if (found != null) {
+
+                // BIG ERROR WITH PROGRAM CATCHING EXCEPTION
+                // IF ONE OF THE FILEDS IS NULL CONSTRUCTOR WONT BE CALLED
+                // BECAREFULL
+                // WORKS FOR NOW BUT NOT EXPANDABLE
+                if (found.get("role") == null)
                 return new Person(
                         found.getString("username"),
                         found.getString("password"),
                         found.getString("name"),
-                        found.getString("surname"),
-                        Role.valueOf(found.getString("role")));
+                        found.getString("surname")
+                       );
+                else{
+                    return new Person(
+                            found.getString("username"),
+                            found.getString("password"),
+                            found.getString("name"),
+                            found.getString("surname"),
+                            Role.valueOf(found.getString("role"))
+                    );
+                }
             }
             else {
                 System.out.println("empty");
