@@ -2,11 +2,8 @@ package todo.todoapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.input.*;
 import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoDB;
-
-import javax.crypto.spec.PSource;
 
 public class PopupManageControler {
     @FXML

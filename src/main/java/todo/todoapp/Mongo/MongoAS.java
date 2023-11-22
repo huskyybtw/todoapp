@@ -7,7 +7,6 @@ import org.bson.Document;
 import todo.todoapp.General.Assignment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -21,9 +20,9 @@ public class MongoAS {
     // INSTERTS DOCUMENT INTO COLLECTION
     // ACCEPTS ASSIGMENT OBJECT OF DOCUMENT INFO
     // RETURNS TRUE IF ALL GOOD
-    public static boolean insert_one(Assignment task){
+    public static boolean insertOne(Assignment task){
 
-        if (check_single("TITLE", task.getTITLE())){
+        if (checkSingle("TITLE", task.getTITLE())){
             return false; // THAT TASK ALREDY EXISTS
         }
 
@@ -36,7 +35,7 @@ public class MongoAS {
 
     // GETS DOCUMENT INFO
     // RETURNS TRUE IF FOUND DOCUMENT
-    public static boolean check_single(String key, String value) {
+    public static boolean checkSingle(String key, String value) {
         Document search = new Document(key, value);
         Document found = COLLECTION.find(search).first();
 
@@ -49,7 +48,7 @@ public class MongoAS {
         }
     }
 
-    public static Assignment get_single(String TITLE_VALUE) {
+    public static Assignment getSingle(String TITLE_VALUE) {
         try {
             Document search = new Document("TITLE", TITLE_VALUE);
             Document found = COLLECTION.find(search).first();
