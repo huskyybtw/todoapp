@@ -1,16 +1,15 @@
 package todo.todoapp.Mongo;
 
+import com.mongodb.client.*;
 import org.bson.Document;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.ConnectionString;
 import todo.todoapp.General.Assignment;
 import todo.todoapp.General.Person;
 import todo.todoapp.Enums.Role;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /*
 CLASS FOR CONNECTION WITH DATABASE
@@ -94,6 +93,36 @@ public class MongoDB {
         } catch (Exception e) {
             System.out.println("EXCEPTION: " + e.getMessage());
             return new Person();
+        }
+    }
+
+    public static List<Person> findTeam(int team) {
+        try {
+            Document search = new Document("team", team);
+            FindIterable<Document> foundDocuments = COLLECTION.find(search);
+
+            List<Person> teamList = new ArrayList<>();
+
+            for (Document found : foundDocuments) {
+                Person person = new Person(
+                        found.getString("username"),
+                        found.getString("password"),
+                        found.getString("name"),
+                        found.getString("surname"),
+                        Role.valueOf(found.getString("role")),
+                        (int)found.getInteger("team"));
+                teamList.add(person);
+                }
+
+            if (!teamList.isEmpty()) {
+                return teamList;
+            } else {
+                System.out.println("Team is empty: " + team);
+                return new ArrayList<>();
+            }
+        } catch (Exception e) {
+            System.out.println("EXCEPTION : " + e.getMessage());
+            return new ArrayList<>();
         }
     }
 
