@@ -25,23 +25,14 @@ public class MongoDB {
     // IF NO USER WITH THIS NAME IS IN THE DATABASE
     // INSERTS DOCUMENT INTO COLLECTION
     // ACCEPTS PERSON OBJECT OF DOCUMENT INFO
-    // RETURNS TRUE IF ALL GOOD
-    public static boolean insertOne(Person person){
+    public static void insertOne(Person person) {
 
-        if (checkSingle("username",person.getUsername())){
-            System.out.println("username alredy exists ERROR");
-            return false; // THAT USERNAME ALREDY EXISTS
-        }
-
-        else {
+        if (!checkSingle("username", person.getUsername())) {
             try {
                 Document document = person.toDocument();
                 COLLECTION.insertOne(document);
-                return true;
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("EXCEPTION: " + e.getMessage());
-                return false;
             }
         }
     }

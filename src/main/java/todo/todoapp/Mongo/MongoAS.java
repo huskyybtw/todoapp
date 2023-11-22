@@ -16,20 +16,18 @@ public class MongoAS {
     private static final MongoDatabase DATABASE = MONGOCLIENT.getDatabase("test");
     private static final MongoCollection<Document> COLLECTION = DATABASE.getCollection("Assignments");
 
-    // IF NO TASK WITH THIS TITLE IS IN THE DATABASE
+    // IF NO USER WITH THIS NAME IS IN THE DATABASE
     // INSERTS DOCUMENT INTO COLLECTION
     // ACCEPTS ASSIGNMENT OBJECT OF DOCUMENT INFO
-    // RETURNS TRUE IF ALL GOOD
-    public static boolean insertOne(Assignment task){
+    public static void insertOne(Assignment task) {
 
-        if (checkSingle("TITLE", task.getTITLE())){
-            return false; // THAT TASK ALREADY EXISTS
-        }
-
-        else {
-            Document document = task.toDocument();
-            COLLECTION.insertOne(document);
-            return true;
+        if (!checkSingle("TITLE", task.getTITLE())) {
+            try {
+                Document document = task.toDocument();
+                COLLECTION.insertOne(document);
+            } catch (Exception e) {
+                System.out.println("EXCEPTION: " + e.getMessage());
+            }
         }
     }
 
