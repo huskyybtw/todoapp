@@ -1,5 +1,7 @@
 package todo.todoapp;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoAS;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class DashboardController {
@@ -25,6 +28,7 @@ public class DashboardController {
     private  Label display_username_Label;
     @FXML
     private ListView<Assignment> tasklist_ListView; // TASK LIST
+    private ObservableList<Assignment> taskList = FXCollections.observableArrayList();
 
     private static Person loginPerson; // Stored person object
     // LOGOUT FUNCTION
@@ -38,14 +42,25 @@ public class DashboardController {
         stage.setScene(scene);
         stage.show();
     }
+    // DASHBOARD SETUP
     @FXML
-    public void initialize(Person send_person){ // DISPLAY PROPER USER BASED ON LOGIN
+    public void initialize(Person send_person){
         loginPerson = send_person;
-        display_username_Label.setText("WELCOME : " + loginPerson.getUsername());
-        tasklist_ListView.getItems().setAll(MongoAS.findTasks(loginPerson.getUsername()));
+        display_username_Label.setText("WELCOME : " + send_person.getUsername());
+
+        updateTaskList(send_person);
+    }
+    // DISPLAY PROPER USER BASED ON LOGIN
+    @FXML
+    public void updateTaskList(Person send_person){
+        //CREATE LIST OF TASKS WITH FOUND TASKS
+        List<Assignment> tasks = MongoAS.findTasks(send_person.getUsername());
+        taskList.setAll(tasks);
+        // SET TASK LISTVIEW WITH TASK LIST
+        tasklist_ListView.setItems(taskList);
     }
 
-    // DISPLAY POPUP WINDOW WITH PERSNOAL INFO
+    // DISPLAY POPUP WINDOW WITH PERSONAL INFO
     @FXML
     private void openPopupPersonal(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupPersonal.fxml"));
@@ -74,7 +89,7 @@ public class DashboardController {
         Parent root = loader.load();
         PopupTaskController popupController = loader.getController();
 
-            popupController.initialize(loginPerson);
+            popupController.initialize(loginPerson,this);
 
             // SOME UGLY CODE (SHOWS POPUP WINDOW)
             Stage popupStage = new Stage();
@@ -91,7 +106,7 @@ public class DashboardController {
     public void openPopupManage (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupManage.fxml"));
         Parent root = loader.load();
-        PopupManageControler popupController = loader.getController();
+        PopupManageController popupController = loader.getController();
 
         popupController.initialize(loginPerson);
 

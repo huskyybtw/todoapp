@@ -22,8 +22,8 @@ public class MongoDB {
     private static final MongoDatabase DATABASE = MONGOCLIENT.getDatabase("test");
     private static final MongoCollection<Document> COLLECTION = DATABASE.getCollection("Collection");
 
-    // IF NO USER WITH THIS NAME IS IN THE DATABSE
-    // INSTERTS DOCUMENT INTO COLLECTION
+    // IF NO USER WITH THIS NAME IS IN THE DATABASE
+    // INSERTS DOCUMENT INTO COLLECTION
     // ACCEPTS PERSON OBJECT OF DOCUMENT INFO
     // RETURNS TRUE IF ALL GOOD
     public static boolean insertOne(Person person){
@@ -75,8 +75,8 @@ public class MongoDB {
             if (found != null) {
 
                 // BIG ERROR WITH PROGRAM CATCHING EXCEPTION
-                // IF ONE OF THE FILEDS IS NULL CONSTRUCTOR WONT BE CALLED
-                // BECAREFULL
+                // IF ONE OF THE FILED IS NULL CONSTRUCTOR WONT BE CALLED
+                // BECAREFUL
                     return new Person(
                             found.getString("username"),
                             found.getString("password"),

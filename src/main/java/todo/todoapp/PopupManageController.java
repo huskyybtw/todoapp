@@ -6,12 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import todo.todoapp.Enums.Role;
-import todo.todoapp.General.Assignment;
 import todo.todoapp.General.Person;
-import todo.todoapp.Mongo.MongoAS;
 import todo.todoapp.Mongo.MongoDB;
 
-public class PopupManageControler {
+public class PopupManageController {
     @FXML
     private ListView<Person> team_ListView,unassigned_ListView;
     private Person loginPerson;

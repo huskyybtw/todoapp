@@ -50,7 +50,7 @@ public class LogInController {
         if(found_username.isEmpty()){
             System.out.println("ERROR PUSTY STRING");
         }
-        // IF LOGGIN WAS SUCCESFULL
+        // IF LOGIN WAS SUCCESSFUL
         else {
 
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("DashboardScene.fxml")));

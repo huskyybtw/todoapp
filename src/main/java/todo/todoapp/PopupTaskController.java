@@ -22,11 +22,22 @@ public class PopupTaskController {
     private TextField TITLE_TextField;
     @FXML
     private Label info_Label;
+    private DashboardController dashboardController;
+    private Person self;
 
-    private String creator;
+    public void initialize(Person p,DashboardController d) {
+        // POPUP SETUP
+        self = p;
+        dashboardController = d;/* <---- IMPORTANT WITH PASSING AND SETTING UP DASHBOARD CONTROLLER NO LONGER
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("DashboardScene.fxml"));
+                                    Parent root = loader.load();
+                                    DashboardController dashboardController = loader.getController();
+                                    dashboardController.updateTaskList(self);
 
-    public void initialize(Person p) {
-        creator = p.getUsername();
+                                    IS NEEDED IF U NEED TO ACCESS AND OVERWRITE SOMETHING IN OTHER CONTROLLERS
+                                    ALSO WITH THAT WE ARE WORKING WITH ORIGINAL COMPONENTS (PREVIOUSLY ONLY COPIES)
+                                    */
+
         // SETUP FOR AVAILABLE USERS
         ObservableList<String> availableUsers = FXCollections.observableArrayList(MongoDB.findTeam_usernames(p.getTeam()));
         availableUsers_ListView.setItems(availableUsers);
@@ -44,16 +55,14 @@ public class PopupTaskController {
         // Nie wiem czemu observable ale dziala
         ObservableList<String> assignedUsersList = assignedUsers_ListView.getItems();
 
-        // Check if there are assigned users in the list
-        if (!assignedUsersList.isEmpty()) {
+
             // CREATES NEW ASSIGNMENT
-            Assignment new_task = new Assignment(temp_TITLE, creator, assignedUsersList, temp_deadline);
+            Assignment new_task = new Assignment(temp_TITLE, self.getUsername(), assignedUsersList, temp_deadline);
             MongoAS.insertOne(new_task);
 
+            dashboardController.updateTaskList(self);
+
             info_Label.setText("Task created successfully");
-        } else {
-            info_Label.setText("Please assign the task to at least one user");
-        }
     }
 
     // MOVE FROM USERS TO ASSIGNED
