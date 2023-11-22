@@ -17,5 +17,6 @@
             <Font size="50.0" />
          </font>
       </Label>
+      <Button fx:id="openPopupManage" layoutX="1022.0" layoutY="597.0" mnemonicParsing="false" onAction="#openPopupManage" prefHeight="70.0" prefWidth="178.0" text="Manage" />
     </children>
 </AnchorPane>

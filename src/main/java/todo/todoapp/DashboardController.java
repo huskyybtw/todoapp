@@ -85,6 +85,24 @@ public class DashboardController {
             popupStage.setTitle("Task creation");
             popupStage.showAndWait();
     }
+    @FXML
+    public void openPopupManage (ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupManage.fxml"));
+        Parent root = loader.load();
+        PopupManageControler popupController = loader.getController();
+
+        popupController.initialize(loginPerson);
+
+        // SOME UGLY CODE (SHOWS POPUP WINDOW)
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+        popupStage.setScene(new Scene(root));
+
+        //STAGE SETUP LESS UGLY
+        popupStage.setTitle("Manage users");
+        popupStage.showAndWait();
+    }
 
 }
 
