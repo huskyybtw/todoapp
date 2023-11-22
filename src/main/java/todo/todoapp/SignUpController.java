@@ -14,7 +14,6 @@ import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class SignUpController {
@@ -83,7 +82,7 @@ public class SignUpController {
                 && !password.isEmpty()) {
             // TEAM 0 MEANS UNASSIGNED
             Person person = new Person(username,password,name,surname, Role.UNASSIGNED,0);
-            MongoDB.insert_one(person);
+            MongoDB.insertOne(person);
             info_Label.setText("Zarejestrowano :" + username);
         }
         else{

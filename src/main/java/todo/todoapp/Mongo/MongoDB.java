@@ -3,12 +3,10 @@ package todo.todoapp.Mongo;
 import com.mongodb.client.*;
 import org.bson.Document;
 import com.mongodb.ConnectionString;
-import todo.todoapp.General.Assignment;
 import todo.todoapp.General.Person;
 import todo.todoapp.Enums.Role;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -27,9 +25,9 @@ public class MongoDB {
     // INSTERTS DOCUMENT INTO COLLECTION
     // ACCEPTS PERSON OBJECT OF DOCUMENT INFO
     // RETURNS TRUE IF ALL GOOD
-    public static boolean insert_one(Person person){
+    public static boolean insertOne(Person person){
 
-        if (check_single("username",person.getUsername())){
+        if (checkSingle("username",person.getUsername())){
             System.out.println("username alredy exists ERROR");
             return false; // THAT USERNAME ALREDY EXISTS
         }
@@ -49,7 +47,7 @@ public class MongoDB {
 
     // GETS DOCUMENT INFO
     // RETURNS TRUE IF FOUND DOCUMENT
-    public static boolean check_single(String key, String value) {
+    public static boolean checkSingle(String key, String value) {
         Document search = new Document(key, value);
         Document found = COLLECTION.find(search).first();
 
@@ -67,7 +65,7 @@ public class MongoDB {
     //GETS SINGLE DOCUMENT
     //RETURNS PERSON WITH FOUND DATA
     //IF ERROR RETURNS NULL PERSON
-    public static Person get_single(String username_value) {
+    public static Person getSingle(String username_value) {
         try {
             Document search = new Document("username", username_value);
             Document found = COLLECTION.find(search).first();
@@ -118,6 +116,33 @@ public class MongoDB {
                         (int)found.getInteger("team"));
                 teamList.add(person);
                 }
+
+            if (!teamList.isEmpty()) {
+                return teamList;
+            } else {
+                System.out.println("Team is empty: " + team);
+                return new ArrayList<>();
+            }
+        } catch (Exception e) {
+            System.out.println("EXCEPTION : " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    // FIND ALL TEAM MEMBERS BY TEAM NUMBER
+    // RETURNS LIST OF USERNAMES IN TEAM
+    // BIG CHANCE THE ERROR WILL OCCUR LIKE IN GET_SINGLE
+    // RETURN EMPTY LIST IF ERROR
+    public static List<String> findTeam_usernames(int team) {
+        try {
+            Document search = new Document("team", team);
+            FindIterable<Document> foundDocuments = COLLECTION.find(search);
+
+            List<String> teamList = new ArrayList<>();
+
+            for (Document found : foundDocuments) {
+                teamList.add(found.getString("username"));
+            }
 
             if (!teamList.isEmpty()) {
                 return teamList;

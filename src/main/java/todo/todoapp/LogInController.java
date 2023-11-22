@@ -61,7 +61,7 @@ public class LogInController {
             stage.setScene(scene);
             stage.show();
 
-            Person loginPerson = MongoDB.get_single(found_username);
+            Person loginPerson = MongoDB.getSingle(found_username);
             dashboardController.initialize(loginPerson);
         }
 
