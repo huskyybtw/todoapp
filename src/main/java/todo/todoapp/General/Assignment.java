@@ -17,6 +17,7 @@ public class Assignment {
     private Date deadline;
     private TaskStatus status;
 
+    // IF ERROR
     public Assignment(){
         this.ERROR = true;
         this.CREATION_DATE = null;
@@ -24,7 +25,7 @@ public class Assignment {
         this.TITLE = null;
     }
 
-
+    // IF ASSIGNED TO A SINGLE USER
     public Assignment(String title, String creator, String user, Date deadline){
         this.ERROR = false;
         this.CREATION_DATE = new Date(); // TODAY'S DATE
@@ -35,7 +36,7 @@ public class Assignment {
         this.CREATED_BY = creator;
         this.assigned_users.add(user);
     }
-
+    // IF ASSIGNED TO LIST OF USERS
     public Assignment(String title,String creator,List<String> users,Date deadline){
         this.ERROR = false;
         this.CREATION_DATE = new Date(); // TODAY'S DATE

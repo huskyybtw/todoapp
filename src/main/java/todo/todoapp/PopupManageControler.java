@@ -2,8 +2,11 @@ package todo.todoapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.input.*;
 import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoDB;
+
+import javax.crypto.spec.PSource;
 
 public class PopupManageControler {
     @FXML
@@ -12,8 +15,20 @@ public class PopupManageControler {
 
     public void initialize(Person person){
         loginPerson = person;
-        System.out.println(loginPerson.getTeam());
+        // LISTVIEW SETUP WITH LOGGED PERSON TEAM + UNASSIGNED (0) TEAM
         teamlist_ListView.getItems().setAll(MongoDB.findTeam(loginPerson.getTeam()));
         userlist_ListView.getItems().setAll(MongoDB.findTeam(0));
     }
+    /*
+    @FXML
+    public void dragUser(MouseEvent e){
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent clip = new ClipboardContent();
+
+        clip.put(Person,);
+    }
+    public void dropUser(DragEvent e){
+
+    }
+     */
 }

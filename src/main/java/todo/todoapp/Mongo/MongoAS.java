@@ -17,6 +17,10 @@ public class MongoAS {
     private static final MongoDatabase DATABASE = MONGOCLIENT.getDatabase("test");
     private static final MongoCollection<Document> COLLECTION = DATABASE.getCollection("Assignments");
 
+    // IF NO TASK WITH THIS TITLE IS IN THE DATABSE
+    // INSTERTS DOCUMENT INTO COLLECTION
+    // ACCEPTS ASSIGMENT OBJECT OF DOCUMENT INFO
+    // RETURNS TRUE IF ALL GOOD
     public static boolean insert_one(Assignment task){
 
         if (check_single("TITLE", task.getTITLE())){
@@ -31,6 +35,7 @@ public class MongoAS {
     }
 
     // GETS DOCUMENT INFO
+    // RETURNS TRUE IF FOUND DOCUMENT
     public static boolean check_single(String key, String value) {
         Document search = new Document(key, value);
         Document found = COLLECTION.find(search).first();

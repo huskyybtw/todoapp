@@ -21,6 +21,10 @@ public class PopupTaskController {
 
     private String creator;
 
+    public void initialize(Person p){
+        creator = p.getUsername();
+    }
+
     @FXML
     public void create(ActionEvent e){
         String temp_TITLE =  TITLE_TextField.getText();
@@ -36,9 +40,5 @@ public class PopupTaskController {
             info_Label.setText("task z tym tytulem istnieje");
         }
 
-    }
-
-    public void initialize(String user){
-        creator = user;
     }
 }
