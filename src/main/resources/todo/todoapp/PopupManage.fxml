@@ -5,7 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.PopupManageControler">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.PopupManageController">
    <children>
       <ListView fx:id="team_ListView" layoutY="50.0" onMouseClicked="#onAssignedUserClicked" prefHeight="550.0" prefWidth="400.0" />
       <ListView fx:id="unassigned_ListView" layoutX="400.0" layoutY="50.0" onMouseClicked="#onUserClicked" prefHeight="550.0" prefWidth="400.0" />

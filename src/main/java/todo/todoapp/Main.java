@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import todo.todoapp.General.Person;
-import todo.todoapp.Mongo.MongoDB;
 
 import java.io.IOException;
 
