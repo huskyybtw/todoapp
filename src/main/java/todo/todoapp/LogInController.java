@@ -21,7 +21,6 @@ public class LogInController {
     @FXML
     private PasswordField passwordField;
 
-    private DashboardController dashboardController;
     private Stage stage;
     private Scene scene;
 
@@ -35,6 +34,7 @@ public class LogInController {
         stage.show();
     }
 
+    @FXML
     public void switchToDashboard(ActionEvent event) throws IOException {
         String username = "";
         String password = "";
@@ -50,12 +50,12 @@ public class LogInController {
         if(found_username.isEmpty()){
             System.out.println("ERROR PUSTY STRING");
         }
-
+        // IF LOGGIN WAS SUCCESFULL
         else {
 
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("DashboardScene.fxml")));
             Parent root = loader.load();
-            dashboardController = loader.getController();
+            DashboardController dashboardController = loader.getController();
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

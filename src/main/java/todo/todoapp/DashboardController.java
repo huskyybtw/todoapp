@@ -24,9 +24,10 @@ public class DashboardController {
     @FXML
     private  Label display_username_Label;
     @FXML
-    private ListView<Assignment> tasklist_ListView;
+    private ListView<Assignment> tasklist_ListView; // TASK LIST
 
     private static Person loginPerson; // Stored person object
+    // LOGOUT FUNCTION
     @FXML
     public void switchToLogIn(ActionEvent event) throws IOException {
         loginPerson = null;
@@ -66,14 +67,14 @@ public class DashboardController {
             popupStage.showAndWait();
         }
 
-
+    // DISPLAY POPUP WINDOW WITH TASK CREATION
     @FXML
     public void openPopupTask(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupTask.fxml"));
         Parent root = loader.load();
         PopupTaskController popupController = loader.getController();
 
-            popupController.initialize(loginPerson.getUsername());
+            popupController.initialize(loginPerson);
 
             // SOME UGLY CODE (SHOWS POPUP WINDOW)
             Stage popupStage = new Stage();
@@ -85,6 +86,7 @@ public class DashboardController {
             popupStage.setTitle("Task creation");
             popupStage.showAndWait();
     }
+    // DISPLAY POPUP WINDOW WITH TEAM MANAGE OPTIONS
     @FXML
     public void openPopupManage (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupManage.fxml"));

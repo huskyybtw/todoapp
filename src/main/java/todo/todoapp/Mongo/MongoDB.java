@@ -48,6 +48,7 @@ public class MongoDB {
     }
 
     // GETS DOCUMENT INFO
+    // RETURNS TRUE IF FOUND DOCUMENT
     public static boolean check_single(String key, String value) {
         Document search = new Document(key, value);
         Document found = COLLECTION.find(search).first();
@@ -65,7 +66,7 @@ public class MongoDB {
     }
     //GETS SINGLE DOCUMENT
     //RETURNS PERSON WITH FOUND DATA
-    //IF ERROR RETURNS PERSON
+    //IF ERROR RETURNS NULL PERSON
     public static Person get_single(String username_value) {
         try {
             Document search = new Document("username", username_value);
@@ -96,6 +97,10 @@ public class MongoDB {
         }
     }
 
+    // FIND ALL TEAM MEMBERS BY TEAM NUMBER
+    // RETURNS LIST OF PERSON'S
+    // BIG CHANCE THE ERROR WILL OCCUR LIKE IN GET_SINGLE
+    // RETURN EMPTY IF ERROR
     public static List<Person> findTeam(int team) {
         try {
             Document search = new Document("team", team);

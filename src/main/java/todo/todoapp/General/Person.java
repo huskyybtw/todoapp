@@ -25,7 +25,7 @@ public class Person {
         this.setRole(role);
         this.setTeam(team);
     }
-
+    // CONVERTS OBJECT INTO DOCUMENT FOR MONGODB
     public Document toDocument() {
         Document document = new Document();
 
@@ -38,6 +38,7 @@ public class Person {
 
         return document;
     }
+    // UGLY OOP FEATURE
 
     public String getUsername() {
         return username;
