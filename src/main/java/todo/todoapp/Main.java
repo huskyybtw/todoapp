@@ -17,7 +17,6 @@ public class Main extends Application {
         setup(stage);
 
         Person person= MongoDB.get_single("test");
-        MongoDB.insert_one(person);
 
         stage.show();
     }

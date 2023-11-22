@@ -36,9 +36,15 @@ public class MongoDB {
         }
 
         else {
-            Document document = person.toDocument();
-            COLLECTION.insertOne(document);
-            return true;
+            try {
+                Document document = person.toDocument();
+                COLLECTION.insertOne(document);
+                return true;
+            }
+            catch (Exception e){
+                System.out.println("EXCEPTION: " + e.getMessage());
+                return false;
+            }
         }
     }
 
@@ -72,24 +78,14 @@ public class MongoDB {
                 // BIG ERROR WITH PROGRAM CATCHING EXCEPTION
                 // IF ONE OF THE FILEDS IS NULL CONSTRUCTOR WONT BE CALLED
                 // BECAREFULL
-                // WORKS FOR NOW BUT NOT EXPANDABLE
-                if (found.get("role") == null)
-                return new Person(
-                        found.getString("username"),
-                        found.getString("password"),
-                        found.getString("name"),
-                        found.getString("surname")
-                       );
-                else{
                     return new Person(
                             found.getString("username"),
                             found.getString("password"),
                             found.getString("name"),
                             found.getString("surname"),
-                            Role.valueOf(found.getString("role"))
-                    );
+                            Role.valueOf(found.getString("role")),
+                            found.getInteger("team"));
                 }
-            }
             else {
                 System.out.println("empty");
                 return new Person();
