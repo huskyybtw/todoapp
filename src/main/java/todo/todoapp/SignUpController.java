@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import todo.todoapp.Enums.Role;
 import todo.todoapp.General.Person;
 import todo.todoapp.Mongo.MongoDB;
 
@@ -80,8 +81,8 @@ public class SignUpController {
                 && !name.isEmpty()
                 && !surname.isEmpty()
                 && !password.isEmpty()) {
-
-            Person person = new Person(username,password,name,surname);
+            // TEAM 0 MEANS UNASSIGNED
+            Person person = new Person(username,password,name,surname, Role.UNASSIGNED,0);
             MongoDB.insert_one(person);
             info_Label.setText("Zarejestrowano :" + username);
         }

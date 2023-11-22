@@ -49,6 +49,7 @@ public class MongoAS {
             Document search = new Document("TITLE", TITLE_VALUE);
             Document found = COLLECTION.find(search).first();
 
+            // PROBLEM WILL BE HERE
             if (found != null) {
                 return new Assignment(
                         found.getString("TITLE"),
@@ -62,6 +63,7 @@ public class MongoAS {
                 return new Assignment();
             }
         } catch (Exception e) {
+            System.out.println("EXCEPTION: " + e.getMessage());
             return new Assignment();
         }
     }

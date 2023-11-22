@@ -12,28 +12,18 @@ public class Person {
     private String name;
     private String surname;
 
-    private int team;
+    private int team; // TEAM 0 MEANS UNASSIGNED
 
     public Person(){}
+    public Person(String username, String password, String name, String surname,Role role,int team){
+        this.setUsername(username);
+        this.setPassword(password);
 
-    public Person(String u, String p, String name, String surname){
-        this.setUsername(u);
-        this.setPassword(p);
 
-        this.setRole(Role.WORKER);
         this.setName(name);
         this.setSurname(surname);
-
-    }
-
-    public Person(String u, String p, String name, String surname,Role role){
-        this.setUsername(u);
-        this.setPassword(p);
-
         this.setRole(role);
-        this.setName(name);
-        this.setSurname(surname);
-
+        this.setTeam(team);
     }
 
     public Document toDocument() {
@@ -44,11 +34,7 @@ public class Person {
         document.append("name", this.name);
         document.append("surname", this.surname);
         document.append("role", this.role);
-
-        System.out.println("password" + this.password);
-        System.out.println("name" + this.name);
-        System.out.println("surname" + this.surname);
-        System.out.println("role" + this.role);
+        document.append("team",this.team);
 
         return document;
     }
@@ -92,4 +78,13 @@ public class Person {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public void setTeam(int team) {
+        this.team = team;
+    }
+
+    public int getTeam() {
+        return team;
+    }
+
 }
