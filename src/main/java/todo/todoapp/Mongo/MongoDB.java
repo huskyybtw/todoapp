@@ -8,6 +8,7 @@ import todo.todoapp.Enums.Role;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /*
 CLASS FOR CONNECTION WITH DATABASE
@@ -94,6 +95,19 @@ public class MongoDB {
             return new Person();
         }
     }
+    // UPDATE A KEY + VALUE OF A PERSON P
+    public static void updateOne(String updateKey, Object updateValue,Person p){
+        try{
+        Document search = new Document("username",p.getUsername());
+        Document update = new Document("$set",new Document(updateKey,updateValue));
+
+        COLLECTION.updateOne(search,update);
+        }
+        catch (Exception e){
+            System.out.println("EXCEPTION: " + e.getMessage());
+        }
+    }
+
 
     // FIND ALL TEAM MEMBERS BY TEAM NUMBER
     // RETURNS LIST OF PERSON'S

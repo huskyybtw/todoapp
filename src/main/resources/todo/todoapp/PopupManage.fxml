@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.PopupManageControler">
    <children>
-      <ListView fx:id="teamlist_ListView" layoutY="50.0" prefHeight="550.0" prefWidth="400.0" />
-      <ListView fx:id="userlist_ListView" layoutX="400.0" layoutY="50.0" prefHeight="550.0" prefWidth="400.0" />
+      <ListView fx:id="team_ListView" layoutY="50.0" onMouseClicked="#onAssignedUserClicked" prefHeight="550.0" prefWidth="400.0" />
+      <ListView fx:id="unassigned_ListView" layoutX="400.0" layoutY="50.0" onMouseClicked="#onUserClicked" prefHeight="550.0" prefWidth="400.0" />
       <Label fx:id="teamlist_Label" alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="YOUR TEAM" />
       <Label fx:id="userlist_Label" alignment="CENTER" layoutX="400.0" prefHeight="50.0" prefWidth="400.0" text="USERS" />
+      <Button fx:id="save_Button" layoutX="342.0" mnemonicParsing="false" onAction="#save" prefHeight="50.0" prefWidth="117.0" text="Save" />
    </children>
 </AnchorPane>
