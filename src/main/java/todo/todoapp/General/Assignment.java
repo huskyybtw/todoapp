@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Assignment {
     private final Date CREATION_DATE;
-    private final String TITLE; //  UNIQE ID FOR ASSIGMENTS
+    private final String TITLE; //  UNIQUE ID FOR ASSIGNMENTS
     private final String CREATED_BY;
     private final boolean ERROR;
 
