@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import todo.todoapp.General.Assignment;
@@ -121,5 +122,28 @@ public class DashboardController {
         popupStage.showAndWait();
     }
 
+    // DISPLAY POPUP WINDOW WITH TASK INFORMATION OPTIONS
+    @FXML
+    public void openPopupTaskInfo (MouseEvent event) throws IOException {
+        Assignment task = tasklist_ListView.getSelectionModel().getSelectedItem();
+        // Check if an item is selected
+        if (task != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupTaskInfo.fxml"));
+            Parent root = loader.load();
+            PopupTaskInfoController popupController = loader.getController();
+
+            popupController.initialize(task, this);
+
+            // SOME UGLY CODE (SHOWS POPUP WINDOW)
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            popupStage.setScene(new Scene(root));
+
+            //STAGE SETUP LESS UGLY
+            popupStage.setTitle("TASK" +task.getTITLE() + "INFO");
+            popupStage.showAndWait();
+        }
+    }
 }
 
