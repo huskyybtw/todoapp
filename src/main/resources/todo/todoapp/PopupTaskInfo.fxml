@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.PopupTaskInfoController">
+    <children>
+        <Pane prefHeight="400.0" prefWidth="600.0">
+            <children>
+                <Label fx:id="TITLE_Label" prefHeight="49.0" prefWidth="199.0" text="Label" />
+                <Label fx:id="CREATED_BY_Label" layoutY="49.0" prefHeight="49.0" prefWidth="199.0" text="Label" />
+                <Label fx:id="CREATION_DATE_Label" layoutY="98.0" prefHeight="49.0" prefWidth="199.0" text="Label" />
+                <Label fx:id="deadline_Label" layoutY="147.0" prefHeight="49.0" prefWidth="199.0" text="Label" />
+                <Label fx:id="status_Label" layoutY="196.0" prefHeight="49.0" prefWidth="199.0" text="Label" />
+            <ListView fx:id="assigned_users_ListView" layoutY="234.0" prefHeight="166.0" prefWidth="600.0" />
+            <Label layoutX="199.0" prefHeight="49.0" prefWidth="399.0" text="description :" />
+            <TextArea fx:id="description_field" editable="false" layoutX="192.0" layoutY="34.0" prefHeight="200.0" prefWidth="409.0" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
