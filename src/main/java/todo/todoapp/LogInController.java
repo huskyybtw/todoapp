@@ -59,15 +59,15 @@ public class LogInController {
             try {
                 switch (role) {
                     case MANAGER: {
-                        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("DashboardScene.fxml")));
+                        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("DashboardManageScene.fxml")));
                         Parent root = loader.load();
-                        DashboardController dashboardController = loader.getController();
+                        DashboardManager dashboardManager = loader.getController();
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         stage.setScene(scene);
                         stage.show();
 
-                        dashboardController.initialize(loginPerson);
+                        dashboardManager.initialize(loginPerson);
 
                         break;
                     }
@@ -100,9 +100,7 @@ public class LogInController {
                 }
             }
             catch (Exception e) {
-                Throwable cause = e.getCause();
-                cause.printStackTrace();
-
+                System.out.println("ERROR :"+ e.getMessage());
             }
         }
     }

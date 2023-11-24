@@ -30,6 +30,13 @@ public class DashboardUnassigned {
     private static Person loginPerson;
 
     @FXML
+    public void initialize(Person send_person){
+        loginPerson = send_person;
+        display_username_Label.setText("WELCOME : " + send_person.getUsername());
+
+    }
+
+    @FXML
     public void switchToLogIn(ActionEvent event) throws IOException {
         loginPerson = null;
 
@@ -38,13 +45,6 @@ public class DashboardUnassigned {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    public void initialize(Person send_person){
-        loginPerson = send_person;
-        display_username_Label.setText("WELCOME : " + send_person.getUsername());
-
     }
 
 

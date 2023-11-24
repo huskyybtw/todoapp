@@ -3,10 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.DashboardManager">
     <children>
         <Button fx:id="logout_Button" layoutX="1022.0" layoutY="737.0" mnemonicParsing="false" onAction="#switchToLogIn" prefHeight="61.0" prefWidth="178.0" text="logout" />
       <Button fx:id="openPopupPersonalButton" layoutX="1022.0" layoutY="-1.0" mnemonicParsing="false" onAction="#openPopupPersonal" prefHeight="88.0" prefWidth="178.0" text="Personal Info" />
@@ -18,5 +19,23 @@
          </font>
       </Label>
       <Button fx:id="openPopupManage" layoutX="1022.0" layoutY="597.0" mnemonicParsing="false" onAction="#openPopupManage" prefHeight="70.0" prefWidth="178.0" text="Manage" />
+      <TitledPane animated="false" layoutX="1036.0" layoutY="87.0" prefHeight="250.0" prefWidth="150.0" text="TEAM">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="150.0">
+               <children>
+                <TitledPane animated="false" prefHeight="125.0" text="MANAGERS">
+                     <content>
+                        <ListView fx:id="listView_managers" prefHeight="125.0" prefWidth="150.0" />
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutY="125.0" prefHeight="125.0" text="WORKERS">
+                     <content>
+                        <ListView fx:id="listView_workers" prefHeight="125.0" prefWidth="150.0" />
+                     </content>
+                  </TitledPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
     </children>
 </AnchorPane>

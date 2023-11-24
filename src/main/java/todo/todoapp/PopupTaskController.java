@@ -22,14 +22,14 @@ public class PopupTaskController {
     private TextField TITLE_TextField;
     @FXML
     private Label info_Label;
-    private DashboardController dashboardController;
+    private DashboardManager dashboardManager;
     private Person self;
 
-    public void initialize(Person p,DashboardController d) {
+    public void initialize(Person p, DashboardManager d) {
         // POPUP SETUP
         self = p;
-        dashboardController = d;/* <---- IMPORTANT WITH PASSING AND SETTING UP DASHBOARD CONTROLLER NO LONGER
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("DashboardScene.fxml"));
+        dashboardManager = d;/* <---- IMPORTANT WITH PASSING AND SETTING UP DASHBOARD CONTROLLER NO LONGER
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("DashboardManageScene.fxml"));
                                     Parent root = loader.load();
                                     DashboardController dashboardController = loader.getController();
                                     dashboardController.updateTaskList(self);
@@ -60,7 +60,7 @@ public class PopupTaskController {
             Assignment new_task = new Assignment(temp_TITLE, self.getUsername(), assignedUsersList, temp_deadline);
             MongoAS.insertOne(new_task);
 
-            dashboardController.updateTaskList(self);
+            dashboardManager.updateTaskList(self);
 
             info_Label.setText("Task created successfully");
     }

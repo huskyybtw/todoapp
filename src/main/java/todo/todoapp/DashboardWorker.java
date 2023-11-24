@@ -35,22 +35,9 @@ public class DashboardWorker {
     @FXML
     private ListView<String> listView_managers, listView_workers;
 
-    private ObservableList<Assignment> taskList = FXCollections.observableArrayList();
-
     private static Person loginPerson;
 
-    @FXML
-    public void switchToLogIn(ActionEvent event) throws IOException {
-        loginPerson = null;
 
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LogInScene.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    //@FXML
     public void initialize(Person send_person){
         loginPerson = send_person;
         display_username_Label.setText("WELCOME : " + send_person.getUsername());
@@ -59,32 +46,14 @@ public class DashboardWorker {
         listTeam();
     }
 
-    //@FXML
-    public void updateTaskList(Person send_person){
-        List<Assignment> tasks = MongoAS.findTasks(send_person.getUsername());
-        taskList.setAll(tasks);
-        tasklist_ListView.setItems(taskList);
-    }
-
+    // DISPLAY PROPER USER BASED ON LOGIN
     @FXML
-    private void openPopupPersonal(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupPersonal.fxml"));
-        Parent root = loader.load();
-        PopupPersonalController popupController = loader.getController();
-
-        //GET SINGLE DATA OF PERSON LOGGED IN
-        // PASS IT INTO POPUP
-        popupController.initialize(loginPerson);
-
-        // SOME UGLY CODE (SHOWS POPUP WINDOW)
-        Stage popupStage = new Stage();
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-        popupStage.setScene(new Scene(root));
-
-        //STAGE SETUP LESS UGLY
-        popupStage.setTitle(loginPerson.getUsername() + " personal info");
-        popupStage.showAndWait();
+    public void updateTaskList(Person send_person){
+        //CREATE LIST OF TASKS WITH FOUND TASKS
+        ObservableList<Assignment> taskList = FXCollections.observableArrayList();
+        taskList.setAll(MongoAS.findTasks(send_person.getUsername()));
+        // SET TASK LISTVIEW WITH TASK LIST
+        tasklist_ListView.setItems(taskList);
     }
 
     @FXML
@@ -109,9 +78,36 @@ public class DashboardWorker {
         }
         listView_managers.setItems(manager_list);
         listView_workers.setItems(workers_list);
+    }
+    @FXML
+    public void switchToLogIn(ActionEvent event) throws IOException {
+        loginPerson = null;
 
-
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LogInScene.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
+    @FXML
+    private void openPopupPersonal(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PopupPersonal.fxml"));
+        Parent root = loader.load();
+        PopupPersonalController popupController = loader.getController();
 
+        //GET SINGLE DATA OF PERSON LOGGED IN
+        // PASS IT INTO POPUP
+        popupController.initialize(loginPerson);
+
+        // SOME UGLY CODE (SHOWS POPUP WINDOW)
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+        popupStage.setScene(new Scene(root));
+
+        //STAGE SETUP LESS UGLY
+        popupStage.setTitle(loginPerson.getUsername() + " personal info");
+        popupStage.showAndWait();
+    }
 }
