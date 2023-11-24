@@ -15,6 +15,7 @@ public class Assignment {
 
     private List<String> assigned_users = new ArrayList<>(); // LIST OF USERS
     private Date deadline;
+
     private TaskStatus status;
 
     // IF ERROR
@@ -87,7 +88,13 @@ public class Assignment {
     public List<String> getAssigned_users() {
         return new ArrayList<>(assigned_users);
     }
+    public TaskStatus getStatus() {
+        return status;
+    }
 
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
 
 
 
