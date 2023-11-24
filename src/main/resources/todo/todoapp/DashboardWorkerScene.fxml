@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.todoapp.DashboardWorker">
+    <children>
+        <Button fx:id="logout_Button" layoutX="1022.0" layoutY="737.0" mnemonicParsing="false" onAction="#switchToLogIn" prefHeight="61.0" prefWidth="178.0" text="logout" />
+        <Button fx:id="openPopupPersonalButton" layoutX="1022.0" layoutY="-1.0" mnemonicParsing="false" onAction="#openPopupPersonal" prefHeight="88.0" prefWidth="178.0" text="Personal Info" />
+        <ListView fx:id="tasklist_ListView" layoutY="86.0" prefHeight="718.0" prefWidth="1025.0" />
+        <Label fx:id="display_username_Label" alignment="CENTER" layoutY="-2.0" prefHeight="88.0" prefWidth="1025.0" text="Label">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Label>
+        <Accordion layoutX="1022.0" layoutY="87.0" prefHeight="474.0" prefWidth="178.0">
+            <panes>
+                <TitledPane animated="false" text="Team">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Accordion prefHeight="228.0" prefWidth="202.0">
+                                    <panes>
+                                        <TitledPane animated="false" prefHeight="220.0" prefWidth="202.0" text="Workers">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="200.0">
+                                       <children>
+                                          <ListView fx:id="listView_workers" layoutY="-1.0" prefHeight="201.0" prefWidth="200.0" />
+                                       </children>
+                                    </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                    </panes>
+                                </Accordion>
+                        <Accordion prefHeight="0.0" prefWidth="0.0" />
+                      <TitledPane animated="false" layoutX="-1.0" layoutY="231.0" prefHeight="218.0" prefWidth="202.0" text="Managers">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ListView fx:id="listView_managers" prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </TitledPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+
+
+    </children>
+</AnchorPane>
