@@ -8,7 +8,6 @@ import todo.todoapp.Enums.Role;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /*
 CLASS FOR CONNECTION WITH DATABASE
@@ -118,7 +117,7 @@ public class MongoDB {
                         found.getString("name"),
                         found.getString("surname"),
                         Role.valueOf(found.getString("role")),
-                        (int)found.getInteger("team"));
+                        found.getInteger("team"));
                 teamList.add(person);
                 }
 

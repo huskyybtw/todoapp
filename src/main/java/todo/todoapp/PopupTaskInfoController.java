@@ -24,11 +24,11 @@ public class PopupTaskInfoController {
     ListView<String> assigned_users_ListView;
 
     Assignment task;
-    DashboardController dashboardController;
+    DashboardManager dashboardmanager;
 
-    public void initialize(Assignment t,DashboardController d){
+    public void initialize(Assignment t,DashboardManager d){
         task = t;
-        dashboardController = d;
+        dashboardmanager = d;
         System.out.println(t.getDeadline());
         // FORMAT DATES INTO STRINGS
         LocalDateTime creationDate = task.getCREATION_DATE();
