@@ -8,6 +8,8 @@ import todo.todoapp.Enums.Role;
 import todo.todoapp.Enums.TaskStatus;
 import todo.todoapp.General.Assignment;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,11 +57,16 @@ public class MongoAS {
 
             // PROBLEM WILL BE HERE
             if (found != null) {
+                // CONVERT DATE INTO LOCALDATETIME FOR CONSTRUCTOR
+                LocalDateTime temp_localdate = found.getDate("deadline").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
                 return new Assignment(
                         found.getString("TITLE"),
                         found.getString("CREATED_BY"),
                         found.getList("assigned_users", String.class),
-                        found.getDate("deadline"));
+                        temp_localdate,
+                        found.getString("description")
+                );
             }
 
             else {
@@ -80,11 +87,14 @@ public class MongoAS {
             List<Assignment> taskList = new ArrayList<>();
 
             for (Document found : foundDocuments) {
+                // CONVERT DATE INTO LOCALDATETIME FOR CONSTRUCTOR
+                LocalDateTime temp_localdate = found.getDate("deadline").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 Assignment assignment = new Assignment(
                         found.getString("TITLE"),
                         found.getString("CREATED_BY"),
                         found.getList("assigned_users", String.class),
-                        found.getDate("deadline")
+                        temp_localdate,
+                        found.getString("description")
                 );
                 taskList.add(assignment);
             }
